@@ -1,3 +1,83 @@
 import streamlit as st;
+import os;
+import requests
+from dotenv import load_dotenv;
+from os import getenv;
 
-st.write("My First Streamlit App");
+#load environment variables
+load_dotenv()
+api_key = getenv("STABILITY_API_KEY")
+
+#text input
+user_input =  st.text_input("Enter a prompt", max_chars=50)
+
+#style the text input
+st.markdown(
+    """
+    <style>
+    div.stTextInput {
+        background-color: #f7f7f7;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+def storeImage(response):       
+    with open(os.path.join(os.getcwd(), "resources", f"{user_input}.webp"), 'wb') as file:
+        file.write(response.content)
+
+#calls stable diffusions model with the prompt
+
+def generateImage():
+    response = requests.post(
+        f"https://api.stability.ai/v2beta/stable-image/generate/core",
+        headers={
+            "authorization": f"Bearer {api_key}",
+            "accept": "image/*"
+        },
+        files={"none": ''},
+        data={
+            "prompt": user_input,
+            "output_format": "webp",
+        },
+    )
+
+    if response.status_code == 200:
+        st.success("Image generated")
+        
+        storeImage(response)
+    else:
+        st.error("Error generating image")
+        raise Exception(str(response.json()))
+    
+
+if st.button("Generate"):
+    generateImage()
+    
+
+
+def displayImages():
+
+    # Set the path to the resources directory
+    resources_dir = os.path.join(os.getcwd(), "resources")
+
+      # Get list of files with full paths
+    files = [
+        os.path.join(resources_dir, file)
+        for file in os.listdir(resources_dir)
+        if file.endswith(".webp")
+    ]
+
+    # Sort files by creation time (most recent first)
+    files.sort(key=os.path.getctime, reverse=True)
+
+    # Render the images in sorted order
+    for file in files:
+        st.image(file, caption=os.path.basename(file))
+
+
+displayImages()
