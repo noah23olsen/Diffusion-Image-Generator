@@ -1,7 +1,6 @@
 venv/
 .env
 
-#ensures the empty directory is not ignored
-!resources/
-#don't commit the contents of the folder 
+#ingores everything inside the resources directory
 resources/*
+!resources/.gitkeep
