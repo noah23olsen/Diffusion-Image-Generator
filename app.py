@@ -8,6 +8,48 @@ from os import getenv;
 load_dotenv()
 api_key = getenv("STABILITY_API_KEY")
 
+from google.oauth2 import id_token
+from google_auth_oauthlib.flow import Flow
+from google.auth.transport import requests
+
+GOOGLE_CLIENT_ID = getenv("GOOGLE_CLIENT_ID")
+GOOGLE_API_CLIENT_SECRET = getenv("GOOGLE_API_CLIENT_SECRET")
+REDIRECT_URI = 'http://localhost:8501'
+
+def get_google_login_url():
+    flow = Flow.from_client_config(
+        {
+        "web": {
+                "client_id": GOOGLE_CLIENT_ID,
+                "client_secret": GOOGLE_API_CLIENT_SECRET,
+                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                "token_uri": "https://oauth2.googleapis.com/token",
+                "redirect_uris": [REDIRECT_URI],
+            }
+        },
+        scopes=["https://www.googleapis.com/auth/userinfo.profile"],
+    )
+    
+    flow.redirect_uri = REDIRECT_URI
+
+    #generate the google oauth login url
+    authorization_url, state = flow.authorization_url(
+        access_type="offline",
+        include_granted_scopes="true",
+        prompt='consent'  # forces the user to select account each time
+    )
+
+    return authorization_url
+
+def google_auth():
+    st.title("Google Authentication")
+
+    if st.button("Sign in with Google"):
+        auth_url = get_google_login_url()
+        st.markdown(f"[Click here to sign in]({auth_url})")
+
+google_auth()
+
 #text input
 user_input =  st.text_input("Enter a prompt", max_chars=50)
 
