@@ -1,3 +1,7 @@
 venv/
 .env
-resources/
+
+#ensures the empty directory is not ignored
+!resources/
+#don't commit the contents of the folder 
+resources/*
