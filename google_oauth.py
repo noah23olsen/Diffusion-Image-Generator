@@ -46,6 +46,12 @@ def setup_google_oauth():
         #TODO: implement access token refresh
         #TODO: implement access token validation
         #TODO: display user info
+        
+        #refer to the oauth2 documentation here: 
+        # https://developers.google.com/identity/protocols/oauth2/web-server#python_2
+        # https://console.cloud.google.com/apis/credentials?inv=1&invt=Abk0Ng&project=diffusion-image-generator
+        
+
 
         # # example response:
         # {

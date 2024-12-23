@@ -1,3 +1,4 @@
+# note: these install docs are outdated as oauth 2.0 is being implemented. Do not try the instructions below: 
 
 # AI Image Generator Setup
 
