@@ -28,7 +28,7 @@ def get_google_login_url():
     )
     return authorization_url
 
-def google_auth():
+def setup_google_oauth():
     st.title("Google Authentication")
 
     #check if the user is logged in by checking if the code is in the query params
@@ -36,24 +36,21 @@ def google_auth():
         st.write('you are logged in')
         st.write(st.query_params)
 
-#        # get the access token from the code   
+    #if the user clicks the button, redirect to google sign in
+    if st.button("Sign in with Google"):
+        auth_url = get_google_login_url()
+        st.markdown(f"[Click here to sign in]({auth_url})")
 
-        if st.button("Sign in with Google"):
-            auth_url = get_google_login_url()
-            st.markdown(f"[Click here to sign in]({auth_url})")
+        response = requests.get(auth_url)
 
-    else:
-        #if the user clicks the button, redirect to google sign in
-        if st.button("Sign in with Google"):
-            auth_url = get_google_login_url()
-            st.markdown(f"[Click here to sign in]({auth_url})")
-
-            response = requests.get(auth_url)
+        #TODO: implement access token refresh
+        #TODO: implement access token validation
+        #TODO: display user info
 
         # # example response:
         # {
-        #     "state":"GHoPn0hkfaS2mrWYVOwvzaSDpMOozB"
-        #     "code":"4/0AanRRrt_WA7R5rJbUt95XcQTaXxCtxT-RHI7zkurgHv0qQiNMBu1nEb8eOqctzfBPUWqRQ"
+        #     "state":"GHaaaaaaaaaaaaaaaaaaa"
+        #     "code":"4/0AanRaaaaaaaaaaaaaaaa"
         #     "scope":"email profile openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
         #     "authuser":"0"
         #     "prompt":"consent"

@@ -11,12 +11,8 @@ from google_oauth import *
 
 def main():
 
-    google_auth()
-
-
+    setup_google_oauth()
     generate_image()
-
-
     display_images()
 
 if __name__ == "__main__":
