@@ -4,3 +4,4 @@ venv/
 #ingores everything inside the resources directory
 resources/*
 !resources/.gitkeep
+ignore/*

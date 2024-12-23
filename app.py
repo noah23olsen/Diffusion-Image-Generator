@@ -4,41 +4,34 @@ import requests
 from dotenv import load_dotenv;
 from os import getenv;
 
-#load environment variables
-load_dotenv()
-api_key = getenv("STABILITY_API_KEY")
-
+#google auth
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 from google.auth.transport import requests
 
-GOOGLE_CLIENT_ID = getenv("GOOGLE_CLIENT_ID")
-GOOGLE_API_CLIENT_SECRET = getenv("GOOGLE_API_CLIENT_SECRET")
+#load environment variables
+load_dotenv()
+api_key = getenv("STABILITY_API_KEY")
+
 REDIRECT_URI = 'http://localhost:8501'
 
 def get_google_login_url():
-    flow = Flow.from_client_config(
-        {
-        "web": {
-                "client_id": GOOGLE_CLIENT_ID,
-                "client_secret": GOOGLE_API_CLIENT_SECRET,
-                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-                "token_uri": "https://oauth2.googleapis.com/token",
-                "redirect_uris": [REDIRECT_URI],
-            }
-        },
-        scopes=["https://www.googleapis.com/auth/userinfo.profile"],
+    flow = Flow.from_client_secrets_file(
+        'ignore/client_secret.json',
+        scopes=[
+            'https://www.googleapis.com/auth/userinfo.email',
+            'https://www.googleapis.com/auth/userinfo.profile',
+        ],
     )
-    
     flow.redirect_uri = REDIRECT_URI
 
     #generate the google oauth login url
     authorization_url, state = flow.authorization_url(
+        # enable offline access so that you can refresh an access token without re-prompting the user
         access_type="offline",
         include_granted_scopes="true",
         prompt='consent'  # forces the user to select account each time
     )
-
     return authorization_url
 
 def google_auth():
