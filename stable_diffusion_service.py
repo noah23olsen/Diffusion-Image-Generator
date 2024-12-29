@@ -73,6 +73,10 @@ def display_images():
     # Sort files by creation time (most recent first)
     files.sort(key=os.path.getctime, reverse=True)
 
+    #render only the most recent image
+    st.image(files[0], caption=os.path.basename(files[0]))
+
     # Render the images in sorted order
-    for file in files:
-        st.image(file, caption=os.path.basename(file))
+    #todo: add this back later 
+    #for file in files:
+     #   st.image(file, caption=os.path.basename(file))

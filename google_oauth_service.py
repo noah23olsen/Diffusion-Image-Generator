@@ -17,17 +17,11 @@ REDIRECT_URI = 'http://localhost:8501'
 
 cookies = EncryptedCookieManager(
     prefix = 'streamlit',
-    #todo: maybe implement a secret key here
     password = getenv("COOKIES_SECRET_KEY")
 )
 
 if not cookies.ready():
     st.stop()
-
-st.write("cookies ready")
-st.write(cookies)
-
-
 
 def create_flow():
      return Flow.from_client_secrets_file(
@@ -60,13 +54,9 @@ def get_google_login_url():
     return authorization_url
 
 def exchange_code_for_token(auth_code):
-    #exchange the auth code for an access token
     flow = create_flow()
 
-    response = flow.fetch_token(code=auth_code)
-#    st.write("exchange code response")
- #   st.write(response)
-    #print(response)
+    flow.fetch_token(code=auth_code)
 
     return flow.credentials    
 
@@ -76,7 +66,6 @@ def setup_google_oauth():
 
     if "credentials" in cookies:
         st.write('you are already logged in')
-        st.write(cookies['credentials'])
 
         #unencode the credentials from json
         credentials = json.loads(cookies['credentials'])
@@ -88,20 +77,14 @@ def setup_google_oauth():
             #display the user info picture, and name
             st.image(user_info.json()['picture'])
             st.write(user_info.json()['name'])
-            return
 
 
     #check if the user is logged in by checking if the code is in the query params
     if "code" in st.query_params:
-        st.write('you are logged in')
-        st.write(st.query_params)
+        st.write('you are currently logged in')
 
         auth_code = st.query_params['code']
-        st.write("auth code:" + auth_code)
-
         state = st.query_params['state']
-        st.write("state:" + state)
-        st.write("fetching auth token")
 
         #check if the state is the same as the one in the cookies
         #this is to prevent CSRF attacks
@@ -111,8 +94,6 @@ def setup_google_oauth():
 
         #exchange the auth code for an access token
         credentials = exchange_code_for_token(auth_code)
-        st.write("credentials:")
-        st.write(credentials)
 
         #store and encode the credentials as json strings
         cookies["credentials"] = json.dumps({
@@ -139,6 +120,7 @@ def setup_google_oauth():
 
     #if the user clicks the button, redirect to google sign in
     if st.button("Sign in with Google"):
+        st.write("signing in")
         auth_url = get_google_login_url()
         st.markdown(f"[Click here to sign in]({auth_url})")
 
