@@ -7,7 +7,26 @@ from google.auth.transport import requests
 
 from stable_diffusion_service import *
 
+from streamlit_cookies_manager import EncryptedCookieManager
+from dotenv import load_dotenv;
+from os import getenv;
+import json;
+
+load_dotenv()
 REDIRECT_URI = 'http://localhost:8501'
+
+cookies = EncryptedCookieManager(
+    prefix = 'streamlit',
+    #todo: maybe implement a secret key here
+    password = getenv("COOKIES_SECRET_KEY")
+)
+
+if not cookies.ready():
+    st.stop()
+
+st.write("cookies ready")
+st.write(cookies)
+
 
 
 def create_flow():
@@ -33,6 +52,11 @@ def get_google_login_url():
         prompt='consent'  # forces the user to select account each time
     )
 
+    #save state in cookies
+    cookies['oauth_state'] = state
+    cookies.save()
+    print("cookies saved", cookies)
+
     return authorization_url
 
 def exchange_code_for_token(auth_code):
@@ -40,15 +64,32 @@ def exchange_code_for_token(auth_code):
     flow = create_flow()
 
     response = flow.fetch_token(code=auth_code)
-    st.write("exchange code response")
-    st.write(response)
-    print(response)
+#    st.write("exchange code response")
+ #   st.write(response)
+    #print(response)
 
     return flow.credentials    
 
 
 def setup_google_oauth():
     st.title("Google Authentication")
+
+    if "credentials" in cookies:
+        st.write('you are already logged in')
+        st.write(cookies['credentials'])
+
+        #unencode the credentials from json
+        credentials = json.loads(cookies['credentials'])
+
+        #fetch the user info
+        user_info = requests.request("GET", "https://www.googleapis.com/oauth2/v1/userinfo", headers={"Authorization": f"Bearer {credentials['access_token']}"})
+
+        if user_info.status_code == 200:
+            #display the user info picture, and name
+            st.image(user_info.json()['picture'])
+            st.write(user_info.json()['name'])
+            return
+
 
     #check if the user is logged in by checking if the code is in the query params
     if "code" in st.query_params:
@@ -62,12 +103,27 @@ def setup_google_oauth():
         st.write("state:" + state)
         st.write("fetching auth token")
 
+        #check if the state is the same as the one in the cookies
+        #this is to prevent CSRF attacks
+        if cookies['oauth_state'] != state:
+            st.write("state is not the same as the one in the cookies")
+            st.stop()
+
         #exchange the auth code for an access token
         credentials = exchange_code_for_token(auth_code)
+        st.write("credentials:")
+        st.write(credentials)
 
-        #store the credentials in session state
-        st.session_state['credentials'] = credentials
-        st.write("credentials stored in session state")
+        #store and encode the credentials as json strings
+        cookies["credentials"] = json.dumps({
+        "access_token": credentials.token,
+        "refresh_token": credentials.refresh_token,
+        "expires_at": credentials.expiry.timestamp(),
+        })
+
+#        cookies["user_info"] = json.dumps(user_info)  # Serialize user info as JSON
+        cookies.save()
+        st.write("credentials stored in cookies")
 
         #fetch the user info
         user_info = requests.request("GET", "https://www.googleapis.com/oauth2/v1/userinfo", headers={"Authorization": f"Bearer {credentials.token}"})
