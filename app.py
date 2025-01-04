@@ -8,13 +8,22 @@
 from stable_diffusion_service import *
 #from google_oauth_service import *
 
-from flask import Flask;
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return "Hello, World!"
+    message = ""
+    if request.method == "POST":
+        prompt = request.form.get("prompt") # prompt comes from the HTML form
+        try:
+            file_path = generate_image(prompt)
+            message = f"Image generated successfully! Saved at: {file_path}"
+        except Exception as e:
+            message = f"Error generating image: {e}"
+
+    return render_template("index.html", message=message)
 
 
 #def main():

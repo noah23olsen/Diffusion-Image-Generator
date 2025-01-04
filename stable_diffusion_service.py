@@ -1,61 +1,47 @@
 
 # #import streamlit as st;
-# import os;
-# import requests
-# from dotenv import load_dotenv;
-# from os import getenv;
+import os;
+import requests
+from dotenv import load_dotenv;
+from os import getenv;
 
 # load_dotenv()
-# API_KEY = getenv("STABILITY_API_KEY")
+API_KEY = getenv("STABILITY_API_KEY")
 
+def store_image(response, user_input):       
+    #ensure the resources directory exists
+    os.makedirs(os.path.join(os.getcwd(), "resources"), exist_ok=True)
 
-# #style the text input
-# st.markdown(
-#     """
-#     <style>
-#     div.stTextInput {
-#         background-color: #f7f7f7;
-#         border-radius: 5px;
-#         border: 1px solid #ccc;
-#         padding: 10px;
-#     }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
+    file_path = os.path.join(os.getcwd(), "resources", f"{user_input}.webp")
 
-# def store_image(response, user_input):       
-#     with open(os.path.join(os.getcwd(), "resources", f"{user_input}.webp"), 'wb') as file:
-#         file.write(response.content)
+    with open(file_path, 'wb') as file:
+        file.write(response.content)
+
+    return file_path
 
 # #calls stable diffusions model with the prompt
-def generate_image():
+def generate_image(prompt, output_dir="resources"):
     
-#     #text input
-#     user_input =  st.text_input("Enter a prompt", max_chars=50)
+    response = requests.post(
+        "https://api.stability.ai/v2beta/stable-image/generate/core",
+        headers={
+            "authorization": f"Bearer {API_KEY}",
+            "accept": "image/*"
+        },
+        files={"none": ''},
+        data={
+            "prompt": prompt,
+            "output_format": "webp",
+        },
+    )
 
-#     if st.button("Generate"):
-
-#         response = requests.post(
-#             f"https://api.stability.ai/v2beta/stable-image/generate/core",
-#             headers={
-#                 "authorization": f"Bearer {API_KEY}",
-#                 "accept": "image/*"
-#             },
-#             files={"none": ''},
-#             data={
-#                 "prompt": user_input,
-#                 "output_format": "webp",
-#             },
-#         )
-
-#         if response.status_code == 200:
-#             st.success("Image generated")
-            
-#             store_image(response, user_input)
-#         else:
-#             st.error("Error generating image")
-#             raise Exception(str(response.json()))
+    if response.status_code == 200:
+        print("Image generated")
+        
+        return store_image(response, prompt)
+    else:
+        print("Error generating image")
+        raise Exception(str(response.json()))
     
 
 
