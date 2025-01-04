@@ -12,6 +12,11 @@ app = Flask(__name__)
 
 RESOURCES_DIR = os.path.join(os.getcwd(), "resources")
 
+#TODO: 
+# 1. add google auth
+# 2. deploy to cloud(even if its half broken) 
+    # not sure what vendor to use.. maybe vercel, or streamlit if they let me 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     message = ""
