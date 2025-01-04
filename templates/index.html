@@ -15,5 +15,12 @@
     </form>
 
     <p>{{ message }}</p>
+
+    {% if image_url %}
+    <img src="{{ image_url }}" alt="Generated Image">
+    {% else %}
+        <p>No image found.</p>
+    {% endif %}
+
 </body>
 </html>
