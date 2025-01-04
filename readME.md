@@ -1,4 +1,6 @@
-# note: these install docs are outdated as oauth 2.0 is being implemented. Do not try the instructions below: 
+# Try it yourself
+https://diffusion-image-generator.onrender.com/
+<!-- # note: these install docs are outdated as oauth 2.0 is being implemented. Do not try the instructions below: 
 
 # AI Image Generator Setup
 
@@ -38,5 +40,5 @@ This project allows you to generate AI-powered images using Stable Diffusion.
    ```
 
 5. **Access the Application**:
-   Open the local server URL provided by Streamlit in your browser.
+   Open the local server URL provided by Streamlit in your browser. -->
 
