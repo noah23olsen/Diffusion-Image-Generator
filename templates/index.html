@@ -11,7 +11,7 @@
         <div class="container-fluid">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-8 col-lg-6 mt-5 p-4 shadow bg-white rounded">
-                    <h1 class="text-center mb-4">Stable Diffusion Image Generator</h1>
+                    <h1 class="text-center mb-4">AI Image Generator</h1>
                     
                     <form method="POST" class="form-group">
                         <div class="mb-3">
@@ -33,7 +33,7 @@
                     
                     {% if image_url %}
                     <div class="text-center mt-4">
-                        <img src="{{ image_url }}" alt="Generated Image" class="img-fluid rounded shadow-sm">
+                        <img src="{{ image_url }}" alt="Generated Image" class="img-fluid rounded shadow-sm" style="width: 50%; height: 50%;">
                     </div>
                     {% endif %}
                 </div>

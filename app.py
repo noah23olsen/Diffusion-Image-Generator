@@ -28,7 +28,7 @@ def index():
         prompt = request.form.get("prompt") # prompt comes from the HTML form
         try:
             full_file_path = generate_image(prompt)
-            message = f"Image generated successfully! Saved at: {full_file_path}"
+            #message = f"Image generated successfully! Saved at: {full_file_path}"
 
             filename = os.path.basename(full_file_path)  # Extract filename from the path (eg. image.png)
             image_url = f"/resources/{filename}"  # URL to serve the image (eg. /resources/image.png)
