@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Image Generator</title>
+        <title>AI Image Generator</title>
         {{ bootstrap.load_css() }}
-        {{ bootstrap.load_js() }}        
+        {{ bootstrap.load_js() }}       
+        <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
     </head>
     <body class="bg-light">
         <div class="container-fluid">
@@ -15,14 +16,14 @@
                     
                     <form method="POST" class="form-group">
                         <div class="mb-3">
-                            <input 
-                                type="text" 
+                            <textarea
+                                type="text"
                                 class="form-control" 
                                 id="prompt" 
                                 name="prompt" 
-                                maxlength="50" 
+                                maxlength="500" 
                                 required 
-                                placeholder="Enter a prompt to get started!">
+                                placeholder="Enter a prompt"></textarea>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary btn-block">Generate</button>
@@ -30,7 +31,7 @@
                     </form>
                     
                     <p class="text-muted text-center mt-3">{{ message }}</p>
-                    
+
                     {% if image_url %}
                     <div class="text-center mt-4">
                         <img src="{{ image_url }}" alt="Generated Image" class="img-fluid rounded shadow-sm" style="width: 50%; height: 50%;">
