@@ -24,9 +24,16 @@ def index():
     prompt = request.args.get("prompt", "")
 
     if request.method == "POST":
-        try:
+
+        action = request.form["action"]
+
+        if action == "surprise":
+            prompt = "surprise me!"
+            
+        else: 
             prompt = request.form["prompt"]
-            print("Prompt:", prompt)
+
+        try:
             full_file_path = generate_image(prompt)
 
             filename = os.path.basename(full_file_path)  # Extract filename from the path (eg. image.png)
@@ -34,7 +41,7 @@ def index():
 
             return redirect(url_for("index", message=message, image_url=image_url, prompt=prompt))
         except Exception as e:
-            message = f"Error generating image: {e}"
+            message = f"Error generating image: {e} prompt: {prompt}"
 
     return render_template("index.html", message=message, image_url=image_url, prompt=prompt)
 

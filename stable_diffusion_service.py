@@ -2,6 +2,7 @@
 import os;
 from os import getenv;
 import requests
+import time
 
 # load_dotenv()
 API_KEY = getenv("STABILITY_API_KEY")
@@ -16,6 +17,9 @@ def store_image(response, user_input):
 
     #clean all special characters
     user_input = ''.join(e for e in user_input if e.isalnum())
+
+    #add the timestamp to the filename
+    user_input = f"{user_input}_{int(time.time())}"
 
     file_path = os.path.join(os.getcwd(), "resources", f"{user_input}.webp")
 

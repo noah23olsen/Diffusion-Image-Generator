@@ -17,16 +17,30 @@
                     <form method="POST" class="form-group">
                         <div class="mb-3">
                             <textarea
-                                type="text"
                                 class="form-control" 
                                 id="prompt" 
                                 name="prompt" 
                                 maxlength="500" 
-                                required 
                                 placeholder="Enter a prompt"></textarea>
                         </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-block">Generate</button>
+                        <div class="d-flex justify-content-between">
+                            <!-- Generate Button (Primary Action) -->
+                            <button 
+                                type="submit" 
+                                name="action" 
+                                value="generate" 
+                                class="btn btn-primary flex-grow-1 me-2">
+                                Generate
+                            </button>
+                            
+                            <!-- Surprise Me Button (Secondary Action) -->
+                            <button 
+                                type="submit" 
+                                name="action" 
+                                value="surprise" 
+                                class="btn btn-outline-secondary">
+                                Surprise Me
+                            </button>
                         </div>
                     </form>
                     
