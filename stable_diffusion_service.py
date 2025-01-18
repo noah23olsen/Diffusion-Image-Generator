@@ -11,6 +11,12 @@ def store_image(response, user_input):
     #ensure the resources directory exists
     os.makedirs(os.path.join(os.getcwd(), "resources"), exist_ok=True)
 
+    # Replace spaces with underscores and limit to 20 characters
+    user_input = user_input[:20].replace(" ", "_")
+    
+    #clean all special characters
+    user_input = ''.join(e for e in user_input if e.isalnum())
+
     file_path = os.path.join(os.getcwd(), "resources", f"{user_input}.webp")
 
     with open(file_path, 'wb') as file:
