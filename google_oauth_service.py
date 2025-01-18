@@ -22,7 +22,6 @@ cookies = EncryptedCookieManager(
 
 if not cookies.ready():
     st.stop()
-    #
 
 def create_flow():
      return Flow.from_client_secrets_file(
