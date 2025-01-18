@@ -6,7 +6,7 @@
 from stable_diffusion_service import *
 #from google_oauth_service import *
 
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, redirect, url_for
 from flask_bootstrap import Bootstrap4
 
 app = Flask(__name__)
@@ -16,26 +16,27 @@ RESOURCES_DIR = os.path.join(os.getcwd(), "resources")
 
 #TODO: 
 # 1. add google auth
-# 2. deploy to cloud(even if its half broken) 
-    # not sure what vendor to use.. maybe vercel, or streamlit if they let me 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    message = ""
-    image_url = ""
+    message = request.args.get("message", "")
+    image_url = request.args.get("image_url", "")
+    prompt = request.args.get("prompt", "")
 
     if request.method == "POST":
-        prompt = request.form.get("prompt") # prompt comes from the HTML form
         try:
+            prompt = request.form["prompt"]
+            print("Prompt:", prompt)
             full_file_path = generate_image(prompt)
-            #message = f"Image generated successfully! Saved at: {full_file_path}"
 
             filename = os.path.basename(full_file_path)  # Extract filename from the path (eg. image.png)
             image_url = f"/resources/{filename}"  # URL to serve the image (eg. /resources/image.png)
+
+            return redirect(url_for("index", message=message, image_url=image_url, prompt=prompt))
         except Exception as e:
             message = f"Error generating image: {e}"
 
-    return render_template("index.html", message=message, image_url=image_url)
+    return render_template("index.html", message=message, image_url=image_url, prompt=prompt)
 
 
 # route to serve generated images (flask needs a route to serve static files)
@@ -46,11 +47,5 @@ def resources(filename):
     """
     return send_from_directory(RESOURCES_DIR, filename)
 
-#def main():
-    #setup_google_oauth()
-    #generate_image()
-    #display_images()
-
 if __name__ == "__main__":
-    #main()
     app.run(debug=True)
