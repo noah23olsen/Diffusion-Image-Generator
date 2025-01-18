@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Generator</title>
-</head>
-<body>
-    <h1>Stable Diffusion Image Generator</h1>
-
-    <form method="POST">
-        <label for="prompt">Enter a prompt:</label>
-        <input type="text" id="prompt" name="prompt" maxlength="50" required>
-        <button type="submit">Generate</button>
-    </form>
-
-    <p>{{ message }}</p>
-
-    {% if image_url %}
-    <img src="{{ image_url }}" alt="Generated Image">
-    {% else %}
-        <p>No image found.</p>
-    {% endif %}
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Image Generator</title>
+        {{ bootstrap.load_css() }}
+        {{ bootstrap.load_js() }}        
+    </head>
+    <body class="bg-light">
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8 col-lg-6 mt-5 p-4 shadow bg-white rounded">
+                    <h1 class="text-center mb-4">Stable Diffusion Image Generator</h1>
+                    
+                    <form method="POST" class="form-group">
+                        <div class="mb-3">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="prompt" 
+                                name="prompt" 
+                                maxlength="50" 
+                                required 
+                                placeholder="Enter a prompt to get started!">
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-block">Generate</button>
+                        </div>
+                    </form>
+                    
+                    <p class="text-muted text-center mt-3">{{ message }}</p>
+                    
+                    {% if image_url %}
+                    <div class="text-center mt-4">
+                        <img src="{{ image_url }}" alt="Generated Image" class="img-fluid rounded shadow-sm">
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

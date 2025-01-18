@@ -7,8 +7,10 @@ from stable_diffusion_service import *
 #from google_oauth_service import *
 
 from flask import Flask, render_template, request, send_from_directory
+from flask_bootstrap import Bootstrap4
 
 app = Flask(__name__)
+bootstrap = Bootstrap4(app)
 
 RESOURCES_DIR = os.path.join(os.getcwd(), "resources")
 
