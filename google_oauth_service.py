@@ -7,11 +7,10 @@ from stable_diffusion_service import *
 
 # from streamlit_cookies_manager import EncryptedCookieManager
 from dotenv import load_dotenv;
-from os import getenv;
 import json;
 
 load_dotenv()
-REDIRECT_URI = 'http://localhost:8501'
+REDIRECT_URI = 'http://127.0.0.1:5000/auth-callback'
 
 # cookies = EncryptedCookieManager(
 #     prefix = 'streamlit',
@@ -22,15 +21,20 @@ REDIRECT_URI = 'http://localhost:8501'
 #     st.stop()
 
 def create_flow():
-     return Flow.from_client_secrets_file(
-        'ignore/client_secret.json',
-        scopes=[
-            'openid',
-            'https://www.googleapis.com/auth/userinfo.email',
-            'https://www.googleapis.com/auth/userinfo.profile',
-        ],
-        redirect_uri=REDIRECT_URI
-    )
+    try:
+        print("Creating flow...")
+        return Flow.from_client_secrets_file(
+            'ignore/client_secret.json',  # Ensure this file exists and has correct content
+            scopes=[
+                'openid',
+                'https://www.googleapis.com/auth/userinfo.email',
+                'https://www.googleapis.com/auth/userinfo.profile',
+            ],
+            redirect_uri=REDIRECT_URI
+        )
+    except Exception as e:
+        print("Error creating flow:", str(e))
+        raise
 
 def get_google_login_url():
 
@@ -44,22 +48,35 @@ def get_google_login_url():
         prompt='consent'  # forces the user to select account each time
     )
 
-    #save state in cookies
-    # cookies['oauth_state'] = state
-    # cookies.save()
-    # print("cookies saved", cookies)
 
     return authorization_url
 
 def exchange_code_for_token(auth_code):
-    flow = create_flow()
+    try:
+        print("exchanging code for token")
+        flow = create_flow()
 
-    flow.fetch_token(code=auth_code)
+        print("flow:", flow)
 
-    return flow.credentials    
+        flow.fetch_token(code=auth_code)
+        print("credentials:", flow.credentials)
+
+        return flow.credentials    
+
+    except Exception as e:
+        print("error exchanging code for token", str(e))
+        raise
+
+def fetch_user_info(token):
+    try:
+        print("fetching user info")
+        return requests.request("GET", "https://www.googleapis.com/oauth2/v1/userinfo", headers={"Authorization": f"Bearer {token}"})
+    except Exception as e:
+        print("error fetching user info", str(e))
+        raise
 
 
-def setup_google_oauth():
+# def setup_google_oauth():
     # st.title("Google Authentication")
 
     # if "credentials" in cookies:
@@ -112,14 +129,6 @@ def setup_google_oauth():
         #display the user info picture, and name
         # st.image(user_info.json()['picture'])
         # st.write(user_info.json()['name'])
-    
-
-    #if the user clicks the button, redirect to google sign in
-    if st.button("Sign in with Google"):
-        st.write("signing in")
-        auth_url = get_google_login_url()
-        st.markdown(f"[Click here to sign in]({auth_url})")
-
 
         #TODO: implement access token refresh
         #TODO: implement access token validation

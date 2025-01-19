@@ -6,13 +6,17 @@
 from stable_diffusion_service import *
 from google_oauth_service import *
 
-from flask import Flask, render_template, request, send_from_directory, redirect, url_for
+from flask import Flask, render_template, request, send_from_directory, redirect, url_for, session
 from flask_bootstrap import Bootstrap4
+from dotenv import load_dotenv;
 
-
+load_dotenv()
 
 app = Flask(__name__)
 bootstrap = Bootstrap4(app)
+
+#this is probably a bad idea to reuse the same key.. but it works haha
+app.secret_key = getenv("STABILITY_API_KEY")
 
 RESOURCES_DIR = os.path.join(os.getcwd(), "resources")
 
@@ -24,6 +28,7 @@ def index():
     message = request.args.get("message", "")
     image_url = request.args.get("image_url", "")
     prompt = request.args.get("prompt", "")
+    user_info = session.get('user_info')
 
     if request.method == "POST":
 
@@ -44,13 +49,33 @@ def index():
         except Exception as e:
             message = f"Error generating image: {e} prompt: {prompt}"
 
-    return render_template("index.html", message=message, image_url=image_url, prompt=prompt)
+    return render_template("index.html", message=message, image_url=image_url, prompt=prompt, user_info=user_info)
 
 @app.route('/sign-in')
-def login():
+def sign_in():
     return redirect(get_google_login_url())
 
+@app.route('/auth-callback')
+def auth_callback():
+    auth_code = request.args.get("code")
+    print("auth_code:", auth_code)
+    state = request.args.get("state")
+    print("state:", state)
 
+    if auth_code and state:
+        credentials = exchange_code_for_token(auth_code)
+        # print("credentials:", credentials.j
+        # sibnce crdentials is an object, to print it, we need to convert it to a dictionary
+        print("credentials:", credentials.to_json())
+        print("token:", credentials.token)
+
+        user_info = fetch_user_info(credentials.token)
+        print("user_info:", user_info.json())
+        session['user_info'] = user_info.json()
+        #pass the user info to the template
+        return redirect(url_for("index", message="Login successful"))
+    else:
+        return redirect(url_for("index", message="Login failed"))
 # route to serve generated images (flask needs a route to serve static files)
 @app.route("/resources/<path:filename>")
 def resources(filename):

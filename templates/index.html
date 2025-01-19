@@ -11,14 +11,26 @@
     </head>
     <body class="bg-light">
         <div class="container-fluid">
-            <div class="row d-flex justify-content-between align-items-center py-2 px-2 text-white" 
+            <div class="row d-flex justify-content-between align-items-center py-2 px-2" 
             style="background: linear-gradient(180deg, #f1f1f1 0%, #ffffff 60%, #f1f1f1 100%); box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
                 <a href="{{ url_for('index') }}">
                     <img src="{{ url_for('static', filename='favicon.png') }}" alt="AI Image Generator" class="img-fluid ml-3 my-2 rounded-lg" style="width: 50px; height: 50px;">
                 </a>
-                <a href="{{ url_for('login') }}" class="btn btn-primary my-3 mr-3">Sign Up</a>
+                <!-- User Info or Sign-Up Button -->
+                {% if user_info %}
+                <div class="d-flex align-items-center">
+                    <!-- Profile Picture -->
+                    <span class="mr-2">{{ user_info['given_name'] }}</span>
+                    <img src="{{ user_info['picture'] }}" alt="{{ user_info['name'] }}" 
+                        class="rounded-circle" style="width: 40px; height: 40px;">
+                    <!-- Given Name -->
+                </div>
+            {% else %}
+                <!-- Sign-Up Button -->
+                <a href="{{ url_for('sign_in') }}" class="btn btn-primary my-3 mr-3">Sign Up</a>
+            {% endif %}
             </div>
-
+    
             <div class="row d-flex justify-content-center">
                 <div class="col-md-8 col-lg-6 mt-5 p-4 shadow bg-white rounded">
                     <h1 class="text-center mb-4">AI Image Generator</h1>
