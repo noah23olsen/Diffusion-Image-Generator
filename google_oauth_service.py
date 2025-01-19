@@ -1,5 +1,3 @@
-import streamlit as st;
-
 #google auth
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
@@ -7,7 +5,7 @@ from google.auth.transport import requests
 
 from stable_diffusion_service import *
 
-from streamlit_cookies_manager import EncryptedCookieManager
+# from streamlit_cookies_manager import EncryptedCookieManager
 from dotenv import load_dotenv;
 from os import getenv;
 import json;
@@ -15,13 +13,13 @@ import json;
 load_dotenv()
 REDIRECT_URI = 'http://localhost:8501'
 
-cookies = EncryptedCookieManager(
-    prefix = 'streamlit',
-    password = getenv("COOKIES_SECRET_KEY")
-)
+# cookies = EncryptedCookieManager(
+#     prefix = 'streamlit',
+#     password = getenv("COOKIES_SECRET_KEY")
+# )
 
-if not cookies.ready():
-    st.stop()
+# if not cookies.ready():
+#     st.stop()
 
 def create_flow():
      return Flow.from_client_secrets_file(
@@ -47,9 +45,9 @@ def get_google_login_url():
     )
 
     #save state in cookies
-    cookies['oauth_state'] = state
-    cookies.save()
-    print("cookies saved", cookies)
+    # cookies['oauth_state'] = state
+    # cookies.save()
+    # print("cookies saved", cookies)
 
     return authorization_url
 
@@ -62,61 +60,59 @@ def exchange_code_for_token(auth_code):
 
 
 def setup_google_oauth():
-    st.title("Google Authentication")
+    # st.title("Google Authentication")
 
-    if "credentials" in cookies:
-        st.write('you are already logged in')
+    # if "credentials" in cookies:
+        # st.write('you are already logged in')
 
         #unencode the credentials from json
-        credentials = json.loads(cookies['credentials'])
+        # credentials = json.loads(cookies['credentials'])
 
         #fetch the user info
-        user_info = requests.request("GET", "https://www.googleapis.com/oauth2/v1/userinfo", headers={"Authorization": f"Bearer {credentials['access_token']}"})
+        # user_info = requests.request("GET", "https://www.googleapis.com/oauth2/v1/userinfo", headers={"Authorization": f"Bearer {credentials['access_token']}"})
 
-        if user_info.status_code == 200:
-            #display the user info picture, and name
-            st.image(user_info.json()['picture'])
-            st.write(user_info.json()['name'])
+        # if user_info.status_code == 200:
+        #     #display the user info picture, and name
+        #     st.image(user_info.json()['picture'])
+        #     st.write(user_info.json()['name'])
 
 
     #check if the user is logged in by checking if the code is in the query params
-    if "code" in st.query_params:
-        st.write('you are currently logged in')
+    # if "code" in st.query_params:
+        # st.write('you are currently logged in')
 
-        auth_code = st.query_params['code']
-        state = st.query_params['state']
+        # auth_code = st.query_params['code']
+        # state = st.query_params['state']
 
         #check if the state is the same as the one in the cookies
         #this is to prevent CSRF attacks
-        if cookies['oauth_state'] != state:
-            st.write("state is not the same as the one in the cookies")
-            st.stop()
+        # if cookies['oauth_state'] != state:
+        #     st.write("state is not the same as the one in the cookies")
+        #     st.stop()
 
         #exchange the auth code for an access token
-        credentials = exchange_code_for_token(auth_code)
+        # credentials = exchange_code_for_token(auth_code)
 
         #store and encode the credentials as json strings
-        cookies["credentials"] = json.dumps({
-        "access_token": credentials.token,
-        "refresh_token": credentials.refresh_token,
-        "expires_at": credentials.expiry.timestamp(),
-        })
+        # cookies["credentials"] = json.dumps({
+        # "access_token": credentials.token,
+        # "refresh_token": credentials.refresh_token,
+        # "expires_at": credentials.expiry.timestamp(),
+        # })
 
 #        cookies["user_info"] = json.dumps(user_info)  # Serialize user info as JSON
-        cookies.save()
-        st.write("credentials stored in cookies")
+        # cookies.save()
+        # st.write("credentials stored in cookies")
 
         #fetch the user info
-        user_info = requests.request("GET", "https://www.googleapis.com/oauth2/v1/userinfo", headers={"Authorization": f"Bearer {credentials.token}"})
-        st.write("user info:")
-        st.write(user_info.json())
+        # user_info = requests.request("GET", "https://www.googleapis.com/oauth2/v1/userinfo", headers={"Authorization": f"Bearer {credentials.token}"})
+        # st.write("user info:")
+        # st.write(user_info.json())
 
         #display the user info picture, and name
-        st.image(user_info.json()['picture'])
-        st.write(user_info.json()['name'])
-
-
-        
+        # st.image(user_info.json()['picture'])
+        # st.write(user_info.json()['name'])
+    
 
     #if the user clicks the button, redirect to google sign in
     if st.button("Sign in with Google"):

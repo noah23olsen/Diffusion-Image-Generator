@@ -4,7 +4,7 @@
 #from google.auth.transport import requests
 
 from stable_diffusion_service import *
-#from google_oauth_service import *
+from google_oauth_service import *
 
 from flask import Flask, render_template, request, send_from_directory, redirect, url_for
 from flask_bootstrap import Bootstrap4
@@ -45,6 +45,10 @@ def index():
             message = f"Error generating image: {e} prompt: {prompt}"
 
     return render_template("index.html", message=message, image_url=image_url, prompt=prompt)
+
+@app.route('/sign-in')
+def login():
+    return redirect(get_google_login_url())
 
 
 # route to serve generated images (flask needs a route to serve static files)
