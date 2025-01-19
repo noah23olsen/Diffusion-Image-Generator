@@ -9,6 +9,8 @@ from stable_diffusion_service import *
 from flask import Flask, render_template, request, send_from_directory, redirect, url_for
 from flask_bootstrap import Bootstrap4
 
+
+
 app = Flask(__name__)
 bootstrap = Bootstrap4(app)
 
@@ -16,6 +18,9 @@ RESOURCES_DIR = os.path.join(os.getcwd(), "resources")
 
 #TODO: 
 # 1. add google auth
+
+#how can i run python app.py and not have it crashj when errors happen?
+#answer: run python app.py wit
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -27,11 +32,10 @@ def index():
 
         action = request.form["action"]
 
-        if action == "surprise":
-            prompt = "surprise me!"
-            
-        else: 
+        if request.form["prompt"]:
             prompt = request.form["prompt"]
+        else:
+            prompt = "a random image"
 
         try:
             full_file_path = generate_image(prompt)

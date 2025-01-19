@@ -7,6 +7,7 @@
         {{ bootstrap.load_css() }}
         {{ bootstrap.load_js() }}       
         <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+        <script src="https://kit.fontawesome.com/23cf438c2b.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-light">
         <div class="container-fluid">
@@ -39,7 +40,8 @@
                                 name="action" 
                                 value="surprise" 
                                 class="btn btn-outline-secondary">
-                                Surprise Me
+                                Surprise
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
                             </button>
                         </div>
                     </form>
