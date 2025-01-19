@@ -19,9 +19,6 @@ RESOURCES_DIR = os.path.join(os.getcwd(), "resources")
 #TODO: 
 # 1. add google auth
 
-#how can i run python app.py and not have it crashj when errors happen?
-#answer: run python app.py wit
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     message = request.args.get("message", "")
