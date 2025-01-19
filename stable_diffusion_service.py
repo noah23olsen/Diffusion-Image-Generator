@@ -4,7 +4,6 @@ from os import getenv;
 import requests
 import time
 
-# load_dotenv()
 API_KEY = getenv("STABILITY_API_KEY")
 
 def store_image(response, user_input):   

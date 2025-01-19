@@ -1,16 +1,9 @@
-#google auth
-#from google.oauth2 import id_token
-#from google_auth_oauthlib.flow import Flow
-#from google.auth.transport import requests
-
 from stable_diffusion_service import *
 from google_oauth_service import *
 
 from flask import Flask, render_template, request, send_from_directory, redirect, url_for, session
 from flask_bootstrap import Bootstrap4
-from dotenv import load_dotenv;
-
-load_dotenv()
+from os import getenv;
 
 app = Flask(__name__)
 bootstrap = Bootstrap4(app)
@@ -19,9 +12,6 @@ bootstrap = Bootstrap4(app)
 app.secret_key = getenv("STABILITY_API_KEY")
 
 RESOURCES_DIR = os.path.join(os.getcwd(), "resources")
-
-#TODO: 
-# 1. add google auth
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -58,21 +48,14 @@ def sign_in():
 @app.route('/auth-callback')
 def auth_callback():
     auth_code = request.args.get("code")
-    print("auth_code:", auth_code)
     state = request.args.get("state")
-    print("state:", state)
 
     if auth_code and state:
         credentials = exchange_code_for_token(auth_code)
-        # print("credentials:", credentials.j
-        # sibnce crdentials is an object, to print it, we need to convert it to a dictionary
-        print("credentials:", credentials.to_json())
-        print("token:", credentials.token)
-
         user_info = fetch_user_info(credentials.token)
-        print("user_info:", user_info.json())
+
+        #save user info to session so we can use it later
         session['user_info'] = user_info.json()
-        #pass the user info to the template
         return redirect(url_for("index", message="Login successful"))
     else:
         return redirect(url_for("index", message="Login failed"))
