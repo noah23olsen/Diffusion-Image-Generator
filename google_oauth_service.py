@@ -2,7 +2,9 @@ from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 from google.auth.transport import requests
 
-REDIRECT_URI = 'http://127.0.0.1:5000/auth-callback'
+from os import getenv
+
+REDIRECT_URI =  getenv("REDIRECT_URI")
 
 def create_flow():
     try:
