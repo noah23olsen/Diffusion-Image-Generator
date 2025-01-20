@@ -16,19 +16,22 @@
                 <a href="{{ url_for('index') }}">
                     <img src="{{ url_for('static', filename='favicon.png') }}" alt="AI Image Generator" class="img-fluid ml-3 my-2 rounded-lg" style="width: 50px; height: 50px;">
                 </a>
-                <!-- User Info or Sign-Up Button -->
+
                 {% if user_info %}
-                <div class="d-flex align-items-center">
-                    <!-- Profile Picture -->
-                    <span class="mr-2">{{ user_info['given_name'] }}</span>
-                    <img src="{{ user_info['picture'] }}" alt="{{ user_info['name'] }}" 
-                        class="rounded-circle" style="width: 40px; height: 40px;">
-                    <!-- Given Name -->
-                </div>
-            {% else %}
-                <!-- Sign-Up Button -->
-                <a href="{{ url_for('sign_in') }}" class="btn btn-primary my-3 mr-3">Sign Up</a>
-            {% endif %}
+                <!-- User Profile Dropdown + Sign out button -->
+                    <div class="dropdown show btn">
+                        <img src="{{ user_info['picture'] }}" alt="{{ user_info['name'] }}" 
+                                    class="rounded-circle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="width: 40px; height: 40px;">
+                                    <span class="caret"></span>
+                    
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <!-- Sign-Up Button -->
+                    <a href="{{ url_for('sign_in') }}" class="btn btn-primary my-3 mr-3">Sign In</a>
+                {% endif %}
             </div>
     
             <div class="row d-flex justify-content-center">
@@ -66,8 +69,6 @@
                         </div>
                     </form>
                     
-                    <p class="text-muted text-center mt-3">{{ message }}</p>
-
                     {% if image_url %}
                     <div class="text-center mt-4">
                         <img src="{{ image_url }}" alt="Generated Image" class="img-fluid rounded shadow-sm" style="width: 50%; height: 50%;">

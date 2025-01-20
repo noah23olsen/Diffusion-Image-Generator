@@ -59,6 +59,13 @@ def auth_callback():
         return redirect(url_for("index", message="Login successful"))
     else:
         return redirect(url_for("index", message="Login failed"))
+    
+#logout
+@app.route('/logout')
+def logout():
+    session.pop('user_info', None)
+    return redirect(url_for("index", message="Logged out"))
+
 # route to serve generated images (flask needs a route to serve static files)
 @app.route("/resources/<path:filename>")
 def resources(filename):
