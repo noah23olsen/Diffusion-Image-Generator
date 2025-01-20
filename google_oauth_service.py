@@ -10,7 +10,7 @@ def create_flow():
     try:
         print("Creating flow...")
         return Flow.from_client_secrets_file(
-            'ignore/client_secret.json',  # Ensure this file exists and has correct content
+            'client_secret.json',  # Ensure this file exists and has correct content
             scopes=[
                 'openid',
                 'https://www.googleapis.com/auth/userinfo.email',
