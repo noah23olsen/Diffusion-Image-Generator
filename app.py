@@ -54,6 +54,8 @@ def auth_callback():
         credentials = exchange_code_for_token(auth_code)
         user_info = fetch_user_info(credentials.token)
 
+        user = store_user_info(user_info.json())
+
         #save user info to session so we can use it later
         session['user_info'] = user_info.json()
         return redirect(url_for("index", message="Login successful"))
