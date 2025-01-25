@@ -8,7 +8,6 @@ from os import getenv;
 app = Flask(__name__)
 bootstrap = Bootstrap4(app)
 
-DATABASE_URL = getenv("DATABASE_URL")
 #this is probably a bad idea to reuse the same key.. but it works haha
 app.secret_key = getenv("STABILITY_API_KEY")
 
