@@ -22,7 +22,9 @@ def index():
 
     if request.method == "POST":
 
-        action = request.form["action"]
+    #    action = request.form["action"]
+        action = request.form.get("action", None)  # ✅ Safe way to get "action"
+
 
         if request.form["prompt"]:
             prompt = request.form["prompt"]
