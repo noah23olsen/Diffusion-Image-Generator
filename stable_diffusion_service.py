@@ -33,7 +33,7 @@ def store_image(response, user_input):
 def generate_image(prompt, output_dir="resources"):
     
     response = requests.post(
-        "https://api.stability.ai/v2beta/stable-image/generate/core",
+        "https://api.stability.ai/v2beta/stable-image/generate/ultra",
         headers={
             "authorization": f"Bearer {API_KEY}",
             "accept": "image/*"
