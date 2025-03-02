@@ -1,4 +1,4 @@
 # Try it yourself
-https://diffusion-image-generator.onrender.com/
+https://buildaiart.com
 
 
