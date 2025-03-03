@@ -29,11 +29,11 @@ def store_image(response, user_input):
 
     return file_path
 
-# #calls stable diffusions model with the prompt
 def generate_image(prompt, output_dir="resources"):
-    
+    """Generates an AI image using Stable Diffusion 3.5 Large Turbo and saves it."""
+
     response = requests.post(
-        "https://api.stability.ai/v2beta/stable-image/generate/ultra",
+        "https://api.stability.ai/v2beta/stable-image/generate/sd3",
         headers={
             "authorization": f"Bearer {API_KEY}",
             "accept": "image/*"
@@ -41,21 +41,26 @@ def generate_image(prompt, output_dir="resources"):
         files={"none": ''},
         data={
             "prompt": prompt,
-            "output_format": "webp",
+            "negative_prompt": "low quality, blurry, bad anatomy, distorted, deformed",
+            "output_format": "png",  
+            "model": "sd3.5-large-turbo",
+            "steps": 35,  # The number of steps to take in the diffusion process.
+            "sampler": "DPM++ 2M Karras", # the best for high-quality images while staying relatively fast.
+            "mode": "text-to-image"
         },
     )
 
     if response.status_code == 200:
-        print("Image generated")
+        print("Image generated successfully!")
 
-        #increment the image count
         increment_image_count()
 
         return store_image(response, prompt)
     else:
-        print("Error generating image")
+        print("Error generating image:", response.json())
         raise Exception(str(response.json()))
-    
+
+
 def increment_image_count():
     """
     Increment the image count for the logged-in user.
