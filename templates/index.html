@@ -17,8 +17,11 @@
         <div class="container py-2">
             <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('index') }}">
                 <img src="{{ url_for('static', filename='favicon.png') }}" alt="AI Image Generator" class="rounded-2"
-                    width="40" height="40">
-                <span class="fw-bold fs-4">AI Image Generator</span>
+                    width="40" height="40" style="filter: brightness(1.2) hue-rotate(200deg);">
+                <span class="fw-bold fs-4"
+                    style="background: linear-gradient(45deg, #2962ff, #6b42ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    AI Image Generator
+                </span>
             </a>
 
             <div class="d-flex gap-3 align-items-center">
@@ -41,83 +44,64 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container py-5">
+    <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <h1 class="display-3 fw-bold mb-3"
-                    style="background: linear-gradient(to right, #007bff, #6610f2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                    Create Magic with AI
+                <h1 class="display-3 fw-bold mb-2"
+                    style="background: linear-gradient(45deg, #2962ff, #6b42ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Build Incredible Art with AI
                 </h1>
-                <p class="lead mb-5">Transform your ideas into stunning artwork with our AI image generator</p>
-
-                <div class="card border-0 shadow-lg mb-5 bg-white rounded-4">
-                    <div class="card-body p-4">
-                        <form method="POST" id="generateForm">
-                            <div class="mb-4">
-                                <textarea class="form-control form-control-lg border-2" id="prompt" name="prompt"
-                                    rows="3" placeholder="Describe your imagination..."
-                                    style="resize: none;">{{ prompt if prompt else "" }}</textarea>
-                            </div>
-                            <div class="d-flex gap-3">
-                                <button id="generate-btn" type="submit" name="action" value="generate"
-                                    class="btn btn-primary btn-lg flex-grow-1 py-3">
-                                    <i class="fa-solid fa-wand-magic-sparkles me-2"></i>Generate
-                                </button>
-                                <button id="surprise-btn" type="submit" name="action" value="surprise"
-                                    class="btn btn-outline-primary btn-lg px-4">
-                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                                </button>
-                            </div>
-                        </form>
+                <p class="lead mb-4">Transform your ideas into stunning visuals in seconds.</p>
+                <!-- Input Form -->
+                <form method="POST" id="generateForm" class="mb-4">
+                    <div class="input-group input-group-lg mx-auto" style="max-width: 800px;">
+                        <textarea class="form-control shadow-sm" id="prompt" name="prompt" rows="1"
+                            placeholder="Try something like: 'a futuristic city at sunset'"
+                            style="resize: none; border-radius: 30px; padding: 15px 160px 15px 25px; border: 2px solid #e9ecef;">{{ prompt if prompt else "" }}</textarea>
+                        <div class="position-absolute" style="right: 5px; bottom: 8px; z-index: 4;">
+                            <button id="generate-btn" type="submit" name="action" value="generate" class="btn px-4"
+                                style="border-radius: 20px; background: linear-gradient(45deg, #2962ff, #6b42ff); color: white; border: none; font-weight: 500;">
+                                Create
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
 
                 <!-- Generation Progress -->
                 <div id="generation-progress" class="d-none mb-4">
-                    <div class="progress mb-3" style="height: 10px;">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
-                            role="progressbar" style="width: 100%"></div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="spinner-grow text-primary mx-1" role="status" style="animation-delay: 0s"></div>
+                        <div class="spinner-grow text-primary mx-1" role="status" style="animation-delay: 0.2s"></div>
+                        <div class="spinner-grow text-primary mx-1" role="status" style="animation-delay: 0.4s"></div>
                     </div>
-                    <p class="text-muted">
-                        <i class="fas fa-paintbrush me-2"></i>
+                    <p class="text-muted small">
+                        <i class="fas fa-sparkles me-2"></i>
                         Creating your masterpiece... This may take a minute
                     </p>
                 </div>
 
                 <!-- Image Result Container -->
-                <div id="result-container" class="{% if not image_url %}d-none{% endif %}">
-                    <div class="card border-0 shadow-lg rounded-4 bg-white">
-                        <div class="card-body p-4">
-                            {% if image_url %}
-                            <img src="{{ image_url }}" alt="Generated Image" class="img-fluid rounded-4 mb-4"
-                                style="max-width: 512px;">
-                            <div class="d-flex justify-content-center gap-3">
-                                <button class="btn btn-outline-primary"
-                                    onclick="document.getElementById('generateForm').submit();">
-                                    <i class="fa-solid fa-wand-magic-sparkles me-2"></i>Regenerate
-                                </button>
-                                <a href="{{ image_url }}" download class="btn btn-primary">
-                                    <i class="fas fa-download me-2"></i>Download
-                                </a>
-                            </div>
-                            {% if prompt %}
-                            <p class="text-muted mt-4 mb-0">{{ prompt }}</p>
-                            {% endif %}
-                            {% endif %}
-                        </div>
+                {% if image_url %}
+                <div id="result-container">
+                    <img src="{{ image_url }}" alt="Generated Image" class="img-fluid rounded-4 mb-3 shadow-sm"
+                        style="max-width: 512px;">
+                    <div class="d-flex justify-content-center gap-2 mb-2">
+                        <button class="btn btn-outline-primary btn-sm px-3 rounded-pill" onclick="regenerateImage()">
+                            <i class="fa-solid fa-wand-magic-sparkles mr-1"></i>Regenerate
+                        </button>
+                        <a href="{{ image_url }}" download class="btn btn-primary btn-sm px-3 rounded-pill">
+                            <i class="fas fa-download mr-1"></i>Download
+                        </a>
                     </div>
+                    {% if prompt %}
+                    <p class="text-muted small">{{ prompt }}</p>
+                    {% endif %}
                 </div>
-
+                {% else %}
                 <!-- Initial State Placeholder -->
-                {% if not image_url %}
                 <div id="placeholder-container">
-                    <div class="card border-0 shadow-sm rounded-4 bg-white">
-                        <div class="card-body p-4">
-                            <img src="{{ url_for('static', filename='placeholder.jpg') }}" alt="Example Generated Image"
-                                class="img-fluid rounded-4 mb-3" style="max-width: 512px;">
-                            <p class="text-muted"> ry something like: "a futuristic city at sunset
-                        </div>
-                    </div>
+                    <img src="{{ url_for('static', filename='placeholder.jpg') }}" alt="Example Generated Image"
+                        class="img-fluid rounded-4 mb-3 shadow-sm" style="max-width: 512px;">
                 </div>
                 {% endif %}
             </div>
@@ -127,9 +111,25 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const form = document.querySelector("form");
+            const textarea = document.getElementById("prompt");
             const progressSection = document.getElementById("generation-progress");
-            const resultContainer = document.getElementById("result-container");
             const placeholderContainer = document.getElementById("placeholder-container");
+
+            // Function to adjust textarea height
+            function adjustTextareaHeight(textarea) {
+                textarea.style.height = 'auto';
+                textarea.style.height = (textarea.scrollHeight) + 'px';
+            }
+
+            // Adjust height on page load if there's existing content
+            if (textarea.value) {
+                adjustTextareaHeight(textarea);
+            }
+
+            // Adjust height when typing
+            textarea.addEventListener('input', function () {
+                adjustTextareaHeight(this);
+            });
 
             form.addEventListener("submit", function (event) {
                 if (placeholderContainer) {
@@ -139,7 +139,62 @@
                 document.querySelectorAll("button[type='submit']").forEach(btn => btn.disabled = true);
             });
         });
+
+        function regenerateImage() {
+            const textarea = document.getElementById("prompt");
+            const progressSection = document.getElementById("generation-progress");
+            progressSection.classList.remove("d-none");
+            document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+            textarea.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('generateForm').submit();
+        }
     </script>
+
+    <style>
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+            border: 3px solid #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        textarea {
+            scrollbar-width: thin;
+            scrollbar-color: #888 #f1f1f1;
+        }
+
+        #prompt {
+            min-height: 60px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        #generate-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            transition: all 0.2s ease;
+        }
+
+        #generate-btn {
+            transition: all 0.2s ease;
+        }
+    </style>
 </body>
 
 </html>
