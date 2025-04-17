@@ -34,7 +34,9 @@
             </div>
             {% else %}
             <!-- Sign-Up Button -->
-            <a href="{{ url_for('sign_in') }}" class="btn btn-primary my-3 mr-3">Sign In</a>
+            {% if 'developer' in request.args %}
+                <a href="{{ url_for('sign_in') }}" class="btn btn-primary my-3 mr-3">Sign In</a>
+            {% endif %}
             {% endif %}
         </div>
 
