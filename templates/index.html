@@ -56,7 +56,7 @@
                 <form method="POST" id="generateForm" class="mb-4">
                     <div class="input-group input-group-lg mx-auto" style="max-width: 800px;">
                         <textarea class="form-control shadow-sm" id="prompt" name="prompt" rows="1"
-                            placeholder="Try something like: 'a futuristic city at sunset'"
+                            placeholder="Try something like: 'Techno-utopia & the renaissance'"
                             style="resize: none; border-radius: 30px; padding: 15px 160px 15px 25px; border: 2px solid #e9ecef;">{{ prompt if prompt else "" }}</textarea>
                         <div class="position-absolute" style="right: 5px; bottom: 8px; z-index: 4;">
                             <button id="generate-btn" type="submit" name="action" value="generate" class="btn px-4"
@@ -100,7 +100,7 @@
                 {% else %}
                 <!-- Initial State Placeholder -->
                 <div id="placeholder-container">
-                    <img src="{{ url_for('static', filename='placeholder.jpg') }}" alt="Example Generated Image"
+                    <img src="{{ url_for('static', filename='example.webp') }}" alt="Example Generated Image"
                         class="img-fluid rounded-4 mb-3 shadow-sm" style="max-width: 512px;">
                 </div>
                 {% endif %}
