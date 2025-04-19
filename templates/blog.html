@@ -7,9 +7,9 @@
     <title>Blog - AI Image Generator</title>
 
     <!-- Primary Meta Tags -->
-    <meta name="title" content="Blog - AI Image Generator | Latest in AI Art & Technology">
+    <meta name="title" content="Blog - AI Image Generator | Latest News & Insights">
     <meta name="description"
-        content="Stay updated with the latest trends in AI art generation, tips for creating better prompts, and insights into the future of AI creativity.">
+        content="Stay updated with the latest news, tips, and insights about AI art generation and digital creativity.">
 
     {{ bootstrap.load_css() }}
     {{ bootstrap.load_js() }}
@@ -32,7 +32,9 @@
             <div class="d-flex gap-3">
                 <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
                 <a href="{{ url_for('about') }}" class="btn btn-outline-primary">About</a>
+                <a href="{{ url_for('blog') }}" class="btn btn-outline-primary">Blog</a>
                 <a href="{{ url_for('tutorials') }}" class="btn btn-outline-primary">Tutorials</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-outline-primary">Contact</a>
             </div>
         </div>
     </nav>
@@ -48,113 +50,146 @@
 
                 <!-- Featured Post -->
                 <div class="card shadow-sm mb-4">
-                    <img src="{{ url_for('static', filename='blog-featured.webp') }}" class="card-img-top"
-                        alt="Featured Post">
+                    <img src="{{ posts['future-of-ai-art'].image_url }}" class="card-img-top" alt="Featured Post">
                     <div class="card-body">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <span class="badge bg-primary">Featured</span>
-                            <small class="text-muted">March 15, 2024</small>
-                        </div>
-                        <h2 class="card-title h3">The Future of AI Art: What's Next?</h2>
-                        <p class="card-text">Explore the latest developments in AI art generation and what the future
-                            holds for creative AI technologies.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <h2 class="card-title h3">{{ posts['future-of-ai-art'].title }}</h2>
+                        <p class="text-muted small mb-3">Published on {{ posts['future-of-ai-art'].date }}</p>
+                        <p class="card-text">{{ posts['future-of-ai-art'].description }}</p>
+                        <a href="{{ url_for('blog_post', slug='future-of-ai-art') }}" class="btn btn-primary">Read
+                            More</a>
                     </div>
                 </div>
 
                 <!-- Blog Posts Grid -->
-                <div class="row g-4">
+                <div class="row">
                     <!-- Post 1 -->
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
-                                <div class="d-flex align-items-center gap-2 mb-2">
-                                    <span class="badge bg-info">Tips</span>
-                                    <small class="text-muted">March 10, 2024</small>
-                                </div>
-                                <h3 class="card-title h5">10 Tips for Writing Better AI Art Prompts</h3>
-                                <p class="card-text">Learn how to craft effective prompts that generate stunning AI
-                                    artwork every time.</p>
-                                <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                                <h3 class="card-title h4">{{ posts['mastering-prompts'].title }}</h3>
+                                <p class="text-muted small mb-3">Published on {{ posts['mastering-prompts'].date }}</p>
+                                <p class="card-text">{{ posts['mastering-prompts'].description }}</p>
+                                <a href="{{ url_for('blog_post', slug='mastering-prompts') }}"
+                                    class="btn btn-outline-primary">Read More</a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Post 2 -->
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
-                                <div class="d-flex align-items-center gap-2 mb-2">
-                                    <span class="badge bg-success">Tutorial</span>
-                                    <small class="text-muted">March 5, 2024</small>
-                                </div>
-                                <h3 class="card-title h5">Creating Digital Art with AI: A Beginner's Guide</h3>
-                                <p class="card-text">Start your journey into AI art creation with this comprehensive
-                                    beginner's guide.</p>
-                                <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                                <h3 class="card-title h4">{{ posts['ethical-considerations'].title }}</h3>
+                                <p class="text-muted small mb-3">Published on {{ posts['ethical-considerations'].date }}
+                                </p>
+                                <p class="card-text">{{ posts['ethical-considerations'].description }}</p>
+                                <a href="{{ url_for('blog_post', slug='ethical-considerations') }}"
+                                    class="btn btn-outline-primary">Read More</a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Post 3 -->
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
-                                <div class="d-flex align-items-center gap-2 mb-2">
-                                    <span class="badge bg-warning">News</span>
-                                    <small class="text-muted">March 1, 2024</small>
-                                </div>
-                                <h3 class="card-title h5">The Impact of AI Art on the Creative Industry</h3>
-                                <p class="card-text">How AI art generation is changing the landscape of digital
-                                    creativity and design.</p>
-                                <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                                <h3 class="card-title h4">{{ posts['commercial-applications'].title }}</h3>
+                                <p class="text-muted small mb-3">Published on {{ posts['commercial-applications'].date
+                                    }}</p>
+                                <p class="card-text">{{ posts['commercial-applications'].description }}</p>
+                                <a href="{{ url_for('blog_post', slug='commercial-applications') }}"
+                                    class="btn btn-outline-primary">Read More</a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Post 4 -->
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
-                                <div class="d-flex align-items-center gap-2 mb-2">
-                                    <span class="badge bg-danger">Case Study</span>
-                                    <small class="text-muted">February 25, 2024</small>
-                                </div>
-                                <h3 class="card-title h5">Real-World Applications of AI Art Generation</h3>
-                                <p class="card-text">Discover how businesses are using AI art generation in marketing
-                                    and design.</p>
-                                <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                                <h3 class="card-title h4">{{ posts['science-behind-ai'].title }}</h3>
+                                <p class="text-muted small mb-3">Published on {{ posts['science-behind-ai'].date }}</p>
+                                <p class="card-text">{{ posts['science-behind-ai'].description }}</p>
+                                <a href="{{ url_for('blog_post', slug='science-behind-ai') }}"
+                                    class="btn btn-outline-primary">Read More</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Newsletter Signup -->
-                <div class="card shadow-sm mt-5">
-                    <div class="card-body text-center">
-                        <h3 class="h4 mb-3">Stay Updated</h3>
-                        <p class="text-muted mb-3">Subscribe to our newsletter for the latest AI art tips and updates.
-                        </p>
-                        <form class="d-flex gap-2 justify-content-center">
-                            <input type="email" class="form-control" style="max-width: 300px;"
-                                placeholder="Enter your email">
-                            <button type="submit" class="btn btn-primary">Subscribe</button>
-                        </form>
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Connect With Us</h2>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <i class="fab fa-linkedin text-primary"></i>
+                                    <div>
+                                        <h3 class="h6 mb-1">LinkedIn</h3>
+                                        <a href="https://linkedin.com/in/noaholsen-" target="_blank"
+                                            class="text-decoration-none">@noaholsen</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <i class="fab fa-x-twitter text-primary"></i>
+                                    <div>
+                                        <h3 class="h6 mb-1">X (Twitter)</h3>
+                                        <a href="https://twitter.com/noaholsen_" target="_blank"
+                                            class="text-decoration-none">@noaholsen</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <footer class="bg-white border-top py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5 class="mb-3">AI Image Generator</h5>
+                    <p class="text-muted small">Transform your ideas into stunning visuals in seconds.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{{ url_for('about') }}" class="text-decoration-none">About</a></li>
+                        <li class="mb-2"><a href="{{ url_for('faq') }}" class="text-decoration-none">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5 class="mb-3">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{{ url_for('contact') }}" class="text-decoration-none">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center text-muted small">
+                <p class="mb-0">© 2025 AI Image Generator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <style>
         .card {
             border: none;
             border-radius: 15px;
-            transition: transform 0.2s;
+            transition: transform 0.2s ease;
         }
 
         .card:hover {
             transform: translateY(-5px);
+        }
+
+        .card-body {
+            padding: 1.5rem;
         }
 
         .card-img-top {
@@ -162,11 +197,6 @@
             border-top-right-radius: 15px;
             height: 200px;
             object-fit: cover;
-        }
-
-        .badge {
-            font-size: 0.75rem;
-            padding: 0.35em 0.65em;
         }
     </style>
 </body>

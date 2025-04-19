@@ -67,6 +67,14 @@
                 </span>
             </a>
 
+            <div class="d-flex gap-3">
+                <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+                <a href="{{ url_for('about') }}" class="btn btn-outline-primary">About</a>
+                <a href="{{ url_for('blog') }}" class="btn btn-outline-primary">Blog</a>
+                <a href="{{ url_for('tutorials') }}" class="btn btn-outline-primary">Tutorials</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-outline-primary">Contact</a>
+            </div>
+
             <div class="d-flex gap-3 align-items-center">
                 {% if user_info %}
                 <div class="dropdown">
@@ -162,9 +170,6 @@
                     <h5 class="mb-3">Quick Links</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="{{ url_for('about') }}" class="text-decoration-none">About</a></li>
-                        <li class="mb-2"><a href="{{ url_for('blog') }}" class="text-decoration-none">Blog</a></li>
-                        <li class="mb-2"><a href="{{ url_for('tutorials') }}" class="text-decoration-none">Tutorials</a>
-                        </li>
                         <li class="mb-2"><a href="{{ url_for('faq') }}" class="text-decoration-none">FAQ</a></li>
                     </ul>
                 </div>
@@ -172,8 +177,6 @@
                     <h5 class="mb-3">Support</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="{{ url_for('contact') }}" class="text-decoration-none">Contact Us</a>
-                        </li>
-                        <li class="mb-2"><a href="{{ url_for('faq') }}" class="text-decoration-none">Help Center</a>
                         </li>
                     </ul>
                 </div>

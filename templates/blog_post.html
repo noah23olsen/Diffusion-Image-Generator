@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - AI Image Generator</title>
+    <title>{{ post.title }} - AI Image Generator Blog</title>
 
     <!-- Primary Meta Tags -->
-    <meta name="title" content="Contact - AI Image Generator | Get in Touch">
-    <meta name="description" content="Connect with us on social media or send us an email.">
+    <meta name="title" content="{{ post.title }} - AI Image Generator Blog">
+    <meta name="description" content="{{ post.description }}">
 
     {{ bootstrap.load_css() }}
     {{ bootstrap.load_js() }}
@@ -41,27 +41,41 @@
     <!-- Main Content -->
     <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h1 class="display-4 fw-bold mb-4"
-                    style="background: linear-gradient(45deg, #2962ff, #6b42ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                    Connect With Us
-                </h1>
+            <div class="col-lg-8">
+                <article class="card shadow-sm">
+                    <img src="{{ post.image_url }}" class="card-img-top" alt="{{ post.title }}">
+                    <div class="card-body">
+                        <h1 class="card-title h2 mb-3">{{ post.title }}</h1>
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <span class="text-muted small">{{ post.date }}</span>
+                            <span class="badge bg-primary">{{ post.category }}</span>
+                        </div>
+                        <div class="content">
+                            {{ post.content | safe }}
+                        </div>
+                    </div>
+                </article>
 
-                <div class="card shadow-sm">
-                    <div class="card-body py-5">
-                        <div class="d-flex justify-content-center gap-4">
-                            <a href="mailto:ventures+buildaiart@noaholsen.com"
-                                class="btn btn-lg btn-outline-primary rounded-circle p-3">
-                                <i class="fas fa-envelope fa-2x"></i>
-                            </a>
-                            <a href="https://linkedin.com/in/noaholsen-" target="_blank"
-                                class="btn btn-lg btn-outline-primary rounded-circle p-3">
-                                <i class="fab fa-linkedin fa-2x"></i>
-                            </a>
-                            <a href="https://twitter.com/noaholsen_" target="_blank"
-                                class="btn btn-lg btn-outline-primary rounded-circle p-3">
-                                <i class="fab fa-x-twitter fa-2x"></i>
-                            </a>
+                <!-- Author Info -->
+                <div class="card shadow-sm mt-4">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="{{ url_for('static', filename='favicon.png') }}" alt="Author"
+                                class="rounded-circle" width="60" height="60">
+                            <div>
+                                <h3 class="h5 mb-1">Noah Olsen</h3>
+                                <p class="text-muted small mb-2">AI Art Enthusiast</p>
+                                <div class="d-flex gap-3">
+                                    <a href="https://linkedin.com/in/noaholsen-" target="_blank"
+                                        class="text-decoration-none">
+                                        <i class="fab fa-linkedin text-primary"></i>
+                                    </a>
+                                    <a href="https://twitter.com/noaholsen_" target="_blank"
+                                        class="text-decoration-none">
+                                        <i class="fab fa-x-twitter text-primary"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,12 +122,31 @@
             padding: 2rem;
         }
 
-        .btn-outline-primary {
-            transition: all 0.2s ease;
+        .card-img-top {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            height: 400px;
+            object-fit: cover;
         }
 
-        .btn-outline-primary:hover {
-            transform: translateY(-3px);
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 1.5rem 0;
         }
     </style>
 </body>
