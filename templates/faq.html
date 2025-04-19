@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - AI Image Generator</title>
+    <title>FAQ - AI Image Generator | Common Questions Answered</title>
 
     <!-- Primary Meta Tags -->
     <meta name="title" content="FAQ - AI Image Generator | Frequently Asked Questions">
     <meta name="description"
-        content="Find answers to common questions about AI image generation, usage guidelines, and technical details.">
+        content="Find answers to common questions about AI image generation, pricing, usage, and technical details. Learn how to create better AI art and understand the technology.">
+    <meta name="keywords"
+        content="AI art FAQ, AI image generation questions, Stable Diffusion help, AI art tutorial, image generation guide, AI art pricing">
 
     {{ bootstrap.load_css() }}
     {{ bootstrap.load_js() }}
@@ -48,98 +50,216 @@
                     Frequently Asked Questions
                 </h1>
 
-                <div class="accordion" id="faqAccordion">
-                    <!-- General Questions -->
-                    <div class="accordion-item border-0 mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#general">
-                                General Questions
-                            </button>
-                        </h2>
-                        <div id="general" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                <div class="mb-4">
-                                    <h3 class="h5">What is AI Image Generator?</h3>
-                                    <p>AI Image Generator is a tool that uses artificial intelligence to create unique
-                                        images from text descriptions. Simply enter a prompt, and our AI will generate a
-                                        custom image based on your description.</p>
-                                </div>
-                                <div class="mb-4">
-                                    <h3 class="h5">How does it work?</h3>
-                                    <p>Our system uses advanced diffusion models to understand your text prompt and
-                                        generate corresponding images. The AI analyzes your description and creates a
-                                        unique visual representation.</p>
+                <!-- General Questions -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h4 mb-4">General Questions</h2>
+                        <div class="accordion" id="generalFAQ">
+                            <div class="accordion-item border-0 mb-3">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#general1">
+                                        What is AI Image Generator?
+                                    </button>
+                                </h3>
+                                <div id="general1" class="accordion-collapse collapse show">
+                                    <div class="accordion-body">
+                                        AI Image Generator is a cutting-edge platform that uses artificial intelligence
+                                        to create unique images from text descriptions. Our system employs advanced
+                                        stable diffusion models to transform your written prompts into high-quality
+                                        visual artwork in seconds.
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Usage Questions -->
-                    <div class="accordion-item border-0 mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#usage">
-                                Usage Questions
-                            </button>
-                        </h2>
-                        <div id="usage" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                <div class="mb-4">
-                                    <h3 class="h5">How do I write good prompts?</h3>
-                                    <p>Good prompts are specific and descriptive. Include details about the subject,
-                                        style, mood, and any specific elements you want in the image. Check our
-                                        tutorials for more tips.</p>
-                                </div>
-                                <div class="mb-4">
-                                    <h3 class="h5">Can I use the generated images commercially?</h3>
-                                    <p>Yes, you can use the generated images for both personal and commercial purposes.
-                                        However, please review our terms of service for specific guidelines.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Technical Questions -->
-                    <div class="accordion-item border-0 mb-3">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#technical">
-                                Technical Questions
-                            </button>
-                        </h2>
-                        <div id="technical" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                <div class="mb-4">
-                                    <h3 class="h5">What image formats are supported?</h3>
-                                    <p>We support PNG and JPG formats. Images are generated at 512x512 resolution by
-                                        default.</p>
-                                </div>
-                                <div class="mb-4">
-                                    <h3 class="h5">How long does it take to generate an image?</h3>
-                                    <p>Generation time varies but typically takes between 10-30 seconds depending on
-                                        server load and prompt complexity.</p>
+                            <div class="accordion-item border-0 mb-3">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#general2">
+                                        How does AI image generation work?
+                                    </button>
+                                </h3>
+                                <div id="general2" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        The process involves several steps: 1) Your text prompt is analyzed by our AI,
+                                        2) The AI creates a mathematical representation of your description, 3) This
+                                        representation is used to guide the image generation process through multiple
+                                        refinement steps, 4) The final image is rendered and optimized for quality.
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="text-center mt-4">
-                    <p class="text-muted">Still have questions? <a href="{{ url_for('contact') }}">Contact us</a></p>
+                <!-- Usage & Features -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h4 mb-4">Usage & Features</h2>
+                        <div class="accordion" id="usageFAQ">
+                            <div class="accordion-item border-0 mb-3">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#usage1">
+                                        How do I write effective prompts?
+                                    </button>
+                                </h3>
+                                <div id="usage1" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        For best results: 1) Be specific about style, medium, and subject matter, 2)
+                                        Include artistic references (e.g., "in the style of Van Gogh"), 3) Specify
+                                        lighting and composition details, 4) Use descriptive adjectives, 5) Keep prompts
+                                        clear and concise while including important details.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item border-0 mb-3">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#usage2">
+                                        What image formats and sizes are supported?
+                                    </button>
+                                </h3>
+                                <div id="usage2" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        We currently support generation of images in PNG and JPEG formats. Our standard
+                                        output size is 512x512 pixels, optimized for both quality and generation speed.
+                                        All generated images can be downloaded immediately after creation.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Questions -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h4 mb-4">Technical Questions</h2>
+                        <div class="accordion" id="technicalFAQ">
+                            <div class="accordion-item border-0 mb-3">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#tech1">
+                                        What AI models power the image generation?
+                                    </button>
+                                </h3>
+                                <div id="tech1" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        Our platform uses state-of-the-art stable diffusion models, specifically
+                                        optimized for creative image generation. These models have been trained on
+                                        diverse datasets to understand and generate a wide range of artistic styles and
+                                        subjects.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item border-0 mb-3">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#tech2">
+                                        What are the system requirements?
+                                    </button>
+                                </h3>
+                                <div id="tech2" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        Our web-based platform works on any modern browser (Chrome, Firefox, Safari,
+                                        Edge) and doesn't require any downloads or installations. A stable internet
+                                        connection is recommended for optimal performance.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rights & Usage -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h4 mb-4">Rights & Usage</h2>
+                        <div class="accordion" id="rightsFAQ">
+                            <div class="accordion-item border-0 mb-3">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#rights1">
+                                        Who owns the generated images?
+                                    </button>
+                                </h3>
+                                <div id="rights1" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        You retain full rights to the images you generate using our platform. You can
+                                        use them for personal or commercial purposes. However, please be mindful of
+                                        generating content that might infringe on others' intellectual property rights.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item border-0 mb-3">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#rights2">
+                                        Can I use the images commercially?
+                                    </button>
+                                </h3>
+                                <div id="rights2" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        Yes, you can use generated images for commercial purposes. We recommend
+                                        reviewing our terms of service and ensuring your use complies with relevant laws
+                                        and regulations in your jurisdiction.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <footer class="bg-white border-top py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5 class="mb-3">AI Image Generator</h5>
+                    <p class="text-muted small">Transform your ideas into stunning visuals in seconds.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{{ url_for('about') }}" class="text-decoration-none">About</a></li>
+                        <li class="mb-2"><a href="{{ url_for('faq') }}" class="text-decoration-none">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5 class="mb-3">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{{ url_for('contact') }}" class="text-decoration-none">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center text-muted small">
+                <p class="mb-0">© 2024 AI Image Generator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <style>
-        .accordion-button {
-            border-radius: 10px !important;
+        .accordion-button:not(.collapsed) {
             background-color: #f8f9fa;
+            color: #2962ff;
         }
 
-        .accordion-button:not(.collapsed) {
-            background-color: #e9ecef;
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0, 0, 0, .125);
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+        }
+
+        .accordion-button {
+            border-radius: 10px !important;
         }
 
         .accordion-item {
