@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - AI Image Generator</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Contact - AI Image Generator | Get in Touch">
+    <meta name="description"
+        content="Have questions about AI art generation? Contact our team for support, feedback, or partnership opportunities.">
+
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+    <script src="https://kit.fontawesome.com/23cf438c2b.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+        <div class="container py-2">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='favicon.png') }}" alt="AI Image Generator" class="rounded-2"
+                    width="40" height="40" style="filter: brightness(1.2) hue-rotate(200deg);">
+                <span class="fw-bold fs-4"
+                    style="background: linear-gradient(45deg, #2962ff, #6b42ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    AI Image Generator
+                </span>
+            </a>
+            <div class="d-flex gap-3">
+                <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+                <a href="{{ url_for('about') }}" class="btn btn-outline-primary">About</a>
+                <a href="{{ url_for('blog') }}" class="btn btn-outline-primary">Blog</a>
+                <a href="{{ url_for('tutorials') }}" class="btn btn-outline-primary">Tutorials</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-4 text-center"
+                    style="background: linear-gradient(45deg, #2962ff, #6b42ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Contact Us
+                </h1>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Other Ways to Reach Us</h2>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                    <div>
+                                        <h3 class="h6 mb-1">Email</h3>
+                                        <p class="small text-muted mb-0">support@aiimagegenerator.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <i class="fas fa-clock text-primary"></i>
+                                    <div>
+                                        <h3 class="h6 mb-1">Response Time</h3>
+                                        <p class="small text-muted mb-0">Within 24 hours</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .card {
+            border: none;
+            border-radius: 15px;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        i.fas {
+            font-size: 1.5rem;
+        }
+    </style>
+</body>
+
+</html>

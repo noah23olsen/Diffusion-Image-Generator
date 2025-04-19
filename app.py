@@ -4,6 +4,7 @@ from google_oauth_service import *
 from flask import Flask, render_template, request, send_from_directory, redirect, url_for, session
 from flask_bootstrap import Bootstrap4
 from os import getenv;
+from datetime import datetime
 
 app = Flask(__name__)
 bootstrap = Bootstrap4(app)
@@ -21,10 +22,7 @@ def index():
     user_info = session.get('user_info')
 
     if request.method == "POST":
-
-    #    action = request.form["action"]
         action = request.form.get("action", None)  # Safe way to get "action"
-
 
         if request.form["prompt"]:
             prompt = request.form["prompt"]
@@ -42,6 +40,31 @@ def index():
             message = f"Error generating image: {e} prompt: {prompt}"
 
     return render_template("index.html", message=message, image_url=image_url, prompt=prompt, user_info=user_info)
+
+@app.route('/about')
+def about():
+    user_info = session.get('user_info')
+    return render_template("about.html", user_info=user_info)
+
+@app.route('/blog')
+def blog():
+    user_info = session.get('user_info')
+    return render_template("blog.html", user_info=user_info)
+
+@app.route('/tutorials')
+def tutorials():
+    user_info = session.get('user_info')
+    return render_template("tutorials.html", user_info=user_info)
+
+@app.route('/contact')
+def contact():
+    user_info = session.get('user_info')
+    return render_template("contact.html", user_info=user_info)
+
+@app.route('/faq')
+def faq():
+    user_info = session.get('user_info')
+    return render_template("faq.html", user_info=user_info)
 
 @app.route('/sign-in')
 def sign_in():
@@ -77,6 +100,11 @@ def resources(filename):
     Serve generated images from the resources directory.
     """
     return send_from_directory(RESOURCES_DIR, filename)
+
+# route to serve sitemap.xml
+@app.route('/sitemap.xml')
+def sitemap():
+    return render_template('sitemap.xml', now=datetime.now(), request=request)
 
 if __name__ == "__main__":
     app.run(debug=True)

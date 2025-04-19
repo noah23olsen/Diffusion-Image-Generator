@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorials - AI Image Generator</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Tutorials - AI Image Generator | Learn AI Art Creation">
+    <meta name="description"
+        content="Master AI art generation with our comprehensive tutorials. Learn prompt engineering, style techniques, and advanced AI art creation methods.">
+
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+    <script src="https://kit.fontawesome.com/23cf438c2b.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+        <div class="container py-2">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='favicon.png') }}" alt="AI Image Generator" class="rounded-2"
+                    width="40" height="40" style="filter: brightness(1.2) hue-rotate(200deg);">
+                <span class="fw-bold fs-4"
+                    style="background: linear-gradient(45deg, #2962ff, #6b42ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    AI Image Generator
+                </span>
+            </a>
+            <div class="d-flex gap-3">
+                <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+                <a href="{{ url_for('about') }}" class="btn btn-outline-primary">About</a>
+                <a href="{{ url_for('blog') }}" class="btn btn-outline-primary">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-4 text-center"
+                    style="background: linear-gradient(45deg, #2962ff, #6b42ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    AI Art Tutorials
+                </h1>
+
+                <!-- Getting Started Section -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h3 mb-4">Getting Started</h2>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Introduction to AI Art Generation</h5>
+                                    <small class="text-muted">15 min</small>
+                                </div>
+                                <p class="mb-1">Learn the basics of AI art generation and how to create your first
+                                    artwork.</p>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Understanding Prompts</h5>
+                                    <small class="text-muted">20 min</small>
+                                </div>
+                                <p class="mb-1">Master the art of writing effective prompts for better results.</p>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Basic Style Techniques</h5>
+                                    <small class="text-muted">25 min</small>
+                                </div>
+                                <p class="mb-1">Learn how to apply different artistic styles to your AI-generated art.
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intermediate Section -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h3 mb-4">Intermediate Techniques</h2>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Advanced Prompt Engineering</h5>
+                                    <small class="text-muted">30 min</small>
+                                </div>
+                                <p class="mb-1">Take your prompt writing to the next level with advanced techniques.</p>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Style Mixing and Blending</h5>
+                                    <small class="text-muted">35 min</small>
+                                </div>
+                                <p class="mb-1">Learn how to combine different artistic styles for unique results.</p>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Creating Consistent Characters</h5>
+                                    <small class="text-muted">40 min</small>
+                                </div>
+                                <p class="mb-1">Master the art of generating consistent character designs.</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Section -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h3 mb-4">Advanced Mastery</h2>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Professional Workflows</h5>
+                                    <small class="text-muted">45 min</small>
+                                </div>
+                                <p class="mb-1">Learn professional workflows for commercial AI art projects.</p>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Custom Style Development</h5>
+                                    <small class="text-muted">50 min</small>
+                                </div>
+                                <p class="mb-1">Create and refine your own unique artistic style.</p>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Commercial Applications</h5>
+                                    <small class="text-muted">60 min</small>
+                                </div>
+                                <p class="mb-1">Explore how to use AI art in commercial projects and businesses.</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Tips Section -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h3 mb-4">Quick Tips & Tricks</h2>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Prompt Structure</h5>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Start with
+                                                the main subject</li>
+                                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Add
+                                                descriptive adjectives</li>
+                                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Specify the
+                                                style</li>
+                                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Include
+                                                lighting and mood</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Common Mistakes</h5>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Overly complex
+                                                prompts</li>
+                                            <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Inconsistent
+                                                style mixing</li>
+                                            <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Unclear
+                                                subject focus</li>
+                                            <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Missing key
+                                                details</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .card {
+            border: none;
+            border-radius: 15px;
+        }
+
+        .list-group-item {
+            border: none;
+            border-radius: 10px !important;
+            margin-bottom: 5px;
+        }
+
+        .list-group-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .list-group-item-action {
+            transition: all 0.2s;
+        }
+    </style>
+</body>
+
+</html>

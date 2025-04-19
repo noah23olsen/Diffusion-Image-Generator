@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - AI Image Generator</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="FAQ - AI Image Generator | Frequently Asked Questions">
+    <meta name="description"
+        content="Find answers to common questions about AI image generation, usage guidelines, and technical details.">
+
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+    <script src="https://kit.fontawesome.com/23cf438c2b.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+        <div class="container py-2">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='favicon.png') }}" alt="AI Image Generator" class="rounded-2"
+                    width="40" height="40" style="filter: brightness(1.2) hue-rotate(200deg);">
+                <span class="fw-bold fs-4"
+                    style="background: linear-gradient(45deg, #2962ff, #6b42ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    AI Image Generator
+                </span>
+            </a>
+            <div class="d-flex gap-3">
+                <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+                <a href="{{ url_for('about') }}" class="btn btn-outline-primary">About</a>
+                <a href="{{ url_for('blog') }}" class="btn btn-outline-primary">Blog</a>
+                <a href="{{ url_for('tutorials') }}" class="btn btn-outline-primary">Tutorials</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-outline-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-4 text-center"
+                    style="background: linear-gradient(45deg, #2962ff, #6b42ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Frequently Asked Questions
+                </h1>
+
+                <div class="accordion" id="faqAccordion">
+                    <!-- General Questions -->
+                    <div class="accordion-item border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#general">
+                                General Questions
+                            </button>
+                        </h2>
+                        <div id="general" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <div class="mb-4">
+                                    <h3 class="h5">What is AI Image Generator?</h3>
+                                    <p>AI Image Generator is a tool that uses artificial intelligence to create unique
+                                        images from text descriptions. Simply enter a prompt, and our AI will generate a
+                                        custom image based on your description.</p>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="h5">How does it work?</h3>
+                                    <p>Our system uses advanced diffusion models to understand your text prompt and
+                                        generate corresponding images. The AI analyzes your description and creates a
+                                        unique visual representation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Usage Questions -->
+                    <div class="accordion-item border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#usage">
+                                Usage Questions
+                            </button>
+                        </h2>
+                        <div id="usage" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <div class="mb-4">
+                                    <h3 class="h5">How do I write good prompts?</h3>
+                                    <p>Good prompts are specific and descriptive. Include details about the subject,
+                                        style, mood, and any specific elements you want in the image. Check our
+                                        tutorials for more tips.</p>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="h5">Can I use the generated images commercially?</h3>
+                                    <p>Yes, you can use the generated images for both personal and commercial purposes.
+                                        However, please review our terms of service for specific guidelines.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Questions -->
+                    <div class="accordion-item border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#technical">
+                                Technical Questions
+                            </button>
+                        </h2>
+                        <div id="technical" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <div class="mb-4">
+                                    <h3 class="h5">What image formats are supported?</h3>
+                                    <p>We support PNG and JPG formats. Images are generated at 512x512 resolution by
+                                        default.</p>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="h5">How long does it take to generate an image?</h3>
+                                    <p>Generation time varies but typically takes between 10-30 seconds depending on
+                                        server load and prompt complexity.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <p class="text-muted">Still have questions? <a href="{{ url_for('contact') }}">Contact us</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .accordion-button {
+            border-radius: 10px !important;
+            background-color: #f8f9fa;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #e9ecef;
+        }
+
+        .accordion-item {
+            background-color: transparent;
+        }
+    </style>
+</body>
+
+</html>

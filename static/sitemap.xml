@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>{{ request.url_root }}</loc>
+        <lastmod>{{ now.strftime('%Y-%m-%d') }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>{{ request.url_root }}about</loc>
+        <lastmod>{{ now.strftime('%Y-%m-%d') }}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>{{ request.url_root }}blog</loc>
+        <lastmod>{{ now.strftime('%Y-%m-%d') }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>{{ request.url_root }}tutorials</loc>
+        <lastmod>{{ now.strftime('%Y-%m-%d') }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>{{ request.url_root }}contact</loc>
+        <lastmod>{{ now.strftime('%Y-%m-%d') }}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>{{ request.url_root }}faq</loc>
+        <lastmod>{{ now.strftime('%Y-%m-%d') }}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+</urlset> 

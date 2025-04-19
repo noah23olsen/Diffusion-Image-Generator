@@ -4,7 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Image Generator</title>
+    <title>AI Image Generator - Create Stunning AI Art in Seconds</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="AI Image Generator - Create Stunning AI Art in Seconds">
+    <meta name="description"
+        content="Transform your ideas into stunning AI-generated art. Our AI image generator creates beautiful, unique artwork from your text prompts in seconds. Try it now!">
+    <meta name="keywords"
+        content="AI art generator, AI image generator, text to image, AI art, digital art, image generation, AI creativity">
+    <meta name="author" content="AI Image Generator">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:title" content="AI Image Generator - Create Stunning AI Art in Seconds">
+    <meta property="og:description"
+        content="Transform your ideas into stunning AI-generated art. Our AI image generator creates beautiful, unique artwork from your text prompts in seconds.">
+    <meta property="og:image" content="{{ url_for('static', filename='example.webp', _external=True) }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ request.url }}">
+    <meta property="twitter:title" content="AI Image Generator - Create Stunning AI Art in Seconds">
+    <meta property="twitter:description"
+        content="Transform your ideas into stunning AI-generated art. Our AI image generator creates beautiful, unique artwork from your text prompts in seconds.">
+    <meta property="twitter:image" content="{{ url_for('static', filename='example.webp', _external=True) }}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Image Generator",
+        "description": "Transform your ideas into stunning AI-generated art. Create beautiful, unique artwork from text prompts in seconds.",
+        "url": "{{ request.url }}",
+        "applicationCategory": "ArtApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
     {{ bootstrap.load_css() }}
     {{ bootstrap.load_js() }}
     <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
@@ -107,6 +150,40 @@
             </div>
         </div>
     </div>
+
+    <footer class="bg-white border-top py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5 class="mb-3">AI Image Generator</h5>
+                    <p class="text-muted small">Transform your ideas into stunning visuals in seconds.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{{ url_for('about') }}" class="text-decoration-none">About</a></li>
+                        <li class="mb-2"><a href="{{ url_for('blog') }}" class="text-decoration-none">Blog</a></li>
+                        <li class="mb-2"><a href="{{ url_for('tutorials') }}" class="text-decoration-none">Tutorials</a>
+                        </li>
+                        <li class="mb-2"><a href="{{ url_for('faq') }}" class="text-decoration-none">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5 class="mb-3">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{{ url_for('contact') }}" class="text-decoration-none">Contact Us</a>
+                        </li>
+                        <li class="mb-2"><a href="{{ url_for('faq') }}" class="text-decoration-none">Help Center</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center text-muted small">
+                <p class="mb-0">© 2024 AI Image Generator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {

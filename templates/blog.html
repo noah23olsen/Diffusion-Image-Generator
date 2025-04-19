@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - AI Image Generator</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Blog - AI Image Generator | Latest in AI Art & Technology">
+    <meta name="description"
+        content="Stay updated with the latest trends in AI art generation, tips for creating better prompts, and insights into the future of AI creativity.">
+
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+    <script src="https://kit.fontawesome.com/23cf438c2b.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+        <div class="container py-2">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='favicon.png') }}" alt="AI Image Generator" class="rounded-2"
+                    width="40" height="40" style="filter: brightness(1.2) hue-rotate(200deg);">
+                <span class="fw-bold fs-4"
+                    style="background: linear-gradient(45deg, #2962ff, #6b42ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    AI Image Generator
+                </span>
+            </a>
+            <div class="d-flex gap-3">
+                <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Home</a>
+                <a href="{{ url_for('about') }}" class="btn btn-outline-primary">About</a>
+                <a href="{{ url_for('tutorials') }}" class="btn btn-outline-primary">Tutorials</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-4 text-center"
+                    style="background: linear-gradient(45deg, #2962ff, #6b42ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    AI Art Blog
+                </h1>
+
+                <!-- Featured Post -->
+                <div class="card shadow-sm mb-4">
+                    <img src="{{ url_for('static', filename='blog-featured.webp') }}" class="card-img-top"
+                        alt="Featured Post">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="badge bg-primary">Featured</span>
+                            <small class="text-muted">March 15, 2024</small>
+                        </div>
+                        <h2 class="card-title h3">The Future of AI Art: What's Next?</h2>
+                        <p class="card-text">Explore the latest developments in AI art generation and what the future
+                            holds for creative AI technologies.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Blog Posts Grid -->
+                <div class="row g-4">
+                    <!-- Post 1 -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <span class="badge bg-info">Tips</span>
+                                    <small class="text-muted">March 10, 2024</small>
+                                </div>
+                                <h3 class="card-title h5">10 Tips for Writing Better AI Art Prompts</h3>
+                                <p class="card-text">Learn how to craft effective prompts that generate stunning AI
+                                    artwork every time.</p>
+                                <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 2 -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <span class="badge bg-success">Tutorial</span>
+                                    <small class="text-muted">March 5, 2024</small>
+                                </div>
+                                <h3 class="card-title h5">Creating Digital Art with AI: A Beginner's Guide</h3>
+                                <p class="card-text">Start your journey into AI art creation with this comprehensive
+                                    beginner's guide.</p>
+                                <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 3 -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <span class="badge bg-warning">News</span>
+                                    <small class="text-muted">March 1, 2024</small>
+                                </div>
+                                <h3 class="card-title h5">The Impact of AI Art on the Creative Industry</h3>
+                                <p class="card-text">How AI art generation is changing the landscape of digital
+                                    creativity and design.</p>
+                                <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 4 -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <span class="badge bg-danger">Case Study</span>
+                                    <small class="text-muted">February 25, 2024</small>
+                                </div>
+                                <h3 class="card-title h5">Real-World Applications of AI Art Generation</h3>
+                                <p class="card-text">Discover how businesses are using AI art generation in marketing
+                                    and design.</p>
+                                <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Newsletter Signup -->
+                <div class="card shadow-sm mt-5">
+                    <div class="card-body text-center">
+                        <h3 class="h4 mb-3">Stay Updated</h3>
+                        <p class="text-muted mb-3">Subscribe to our newsletter for the latest AI art tips and updates.
+                        </p>
+                        <form class="d-flex gap-2 justify-content-center">
+                            <input type="email" class="form-control" style="max-width: 300px;"
+                                placeholder="Enter your email">
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img-top {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 0.35em 0.65em;
+        }
+    </style>
+</body>
+
+</html>
