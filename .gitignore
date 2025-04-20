@@ -6,3 +6,4 @@ resources/*
 !resources/.gitkeep
 ignore/*
 client_secret.json
+node_modules/*
